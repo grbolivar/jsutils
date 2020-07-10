@@ -46,9 +46,13 @@ Element.byTag = function (tag) {
 	return document.body.getElementsByTagName(tag);
 };
 
-Element.addClass = function (obj, cls) {
+Element.hasClass = function(obj, cls){
 	cls = cls.trim();
-	if (!obj.className.split(" ").includes(cls)) {
+	return obj.className.split(" ").includes(cls);
+}
+
+Element.addClass = function (obj, cls) {
+	if (!Element.hasClass(cls)) {
 		obj.className += " " + cls;
 	}
 };

@@ -4,9 +4,9 @@ class GObservable {
 		this.observers = {};
 	}
 
-	//Observers are just lambdas
-	setObserver(id, fn) {
-		this.observers[id] = fn;
+	//Observers are just lambda-functions
+	setObserver(id, lambda) {
+		this.observers[id] = lambda;
 	}
 
 	remObserver(id) {
@@ -19,7 +19,7 @@ class GObservable {
 
 	//Warning! No order of notification is guaranteed
 	notify(message) {
-		Object.values(this.observers).forEach(fn => fn(message));
+		Object.values(this.observers).forEach(lambda => lambda(message));
 	}
 
 }
