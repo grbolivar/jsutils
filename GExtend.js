@@ -46,13 +46,13 @@ Element.byTag = function (tag) {
 	return document.body.getElementsByTagName(tag);
 };
 
-Element.hasClass = function(obj, cls){
+Element.hasClass = function (obj, cls) {
 	cls = cls.trim();
 	return obj.className.split(" ").includes(cls);
 }
 
 Element.addClass = function (obj, cls) {
-	if (!Element.hasClass(cls)) {
+	if (!Element.hasClass(obj, cls)) {
 		obj.className += " " + cls;
 	}
 };
@@ -62,12 +62,18 @@ Element.removeClass = function (obj, cls) {
 	obj.className = obj.className.split(" ").filter(e => e != cls).join(" ");
 };
 
+Element.toggleClass = function (obj, cls) {
+	cls = cls.trim();
+	let E = Element;
+	E.hasClass(obj, cls) ? E.removeClass(obj, cls) : E.addClass(obj, cls);
+}
+
 Object.clone = function (original) {
 	if (Array.isArray(original)) return Array.clone(original);
 
 	let clone = {};
 
-	Object.entries(original).forEach(([key, val]) => 
+	Object.entries(original).forEach(([key, val]) =>
 		clone[key] = (val !== null && typeof val === 'object') ? Object.clone(val) : val
 	);
 
